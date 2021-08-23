@@ -1,0 +1,54 @@
+using System;
+
+namespace PalgaKalkulaator
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("Insert Your Salary: ");
+            int Bruto = Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine("\n");
+            if (Bruto <= 1200)
+            {
+                Method1(Bruto);
+            }
+            else if (Bruto >= 1201 && Bruto <= 2099)
+            {
+                Method2(Bruto);
+            }
+            else if (Bruto > 2099)
+            {
+                Method3(Bruto);
+            }
+        }
+
+        static void Method1(int Bruto)
+        {
+            double Maksuvaba = 500;
+            double Pensionikindlustus = (Bruto * 0.02);
+            double Toostuskindlustus = (Bruto * 0.016);
+            double Tulumaks = ((Bruto - (Maksuvaba + Pensionikindlustus + Toostuskindlustus)) * 0.2);
+            Console.WriteLine("Your Net Salary Is: " + ((Bruto - (Pensionikindlustus + Toostuskindlustus) - Tulumaks).ToString("F2") + " eur"));
+        }
+
+        static void Method2(int Bruto)
+        {
+            double Toostuskindlustus = (Bruto * 0.016);
+            double Pensionikindlustus = (Bruto * 0.02);
+            double Tulumaksuvabastus = (500 - 0.55556 * (Bruto - 1200));
+            double Tulumaks = ((Bruto - (Tulumaksuvabastus + Pensionikindlustus + Toostuskindlustus)) * 0.2);
+            double neto = Bruto - Toostuskindlustus - Pensionikindlustus - Tulumaks;
+            Console.WriteLine("Your Net Salary Is: " + neto.ToString("F2") + " eur");
+        }
+
+        static void Method3(int Bruto)
+        {
+            double Toostuskindlustus = (Bruto * 0.016);
+            double Pensionikindlustus = (Bruto * 0.02);
+            double Tulumaks = ((Bruto - (Toostuskindlustus + Pensionikindlustus)) * 0.2);
+            double neto = Bruto - Toostuskindlustus - Pensionikindlustus - Tulumaks;
+            Console.WriteLine("Your Net Salary Is: " + neto.ToString("F2") + " eur");
+        }
+    }
+}
